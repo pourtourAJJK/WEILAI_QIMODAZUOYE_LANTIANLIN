@@ -458,3 +458,45 @@ class AdminBinding(models.Model):
 
     def __str__(self):
         return f"Admin: {self.user.username}"
+
+
+class LoginAttempt(models.Model):
+    """
+    登录失败追踪：同一用户名累计失败 5 次后自动锁定 5 分钟。
+
+    - fail_count: 连续失败次数（成功登录后重置）
+    - locked_until: 锁定到期时间；null 表示当前未锁定
+    - last_failed_at: 最近一次失败时间（清理用）
+    """
+
+    MAX_FAILS_BEFORE_LOCK = 5
+    LOCK_DURATION_SECONDS = 300  # 5 分钟
+
+    username = models.CharField(max_length=150, unique=True, db_index=True)
+    fail_count = models.IntegerField(default=0)
+    locked_until = models.DateTimeField(null=True, blank=True, db_index=True)
+    last_failed_at = models.DateTimeField(null=True, blank=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        db_table = "portfolio_login_attempts"
+        verbose_name = "登录失败追踪"
+
+    def __str__(self):
+        status = "🔒锁定" if self.is_locked() else "🟢正常"
+        return f"{self.username}: {self.fail_count} 次失败 {status}"
+
+    def is_locked(self) -> bool:
+        """当前是否处于锁定状态。"""
+        from django.utils import timezone
+        if not self.locked_until:
+            return False
+        return self.locked_until > timezone.now()
+
+    def remaining_lock_seconds(self) -> int:
+        """剩余锁定秒数（已解锁返回 0）。"""
+        from django.utils import timezone
+        if not self.locked_until:
+            return 0
+        delta = self.locked_until - timezone.now()
+        return max(0, int(delta.total_seconds()))
