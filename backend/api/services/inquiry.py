@@ -10,6 +10,7 @@
 """
 
 from django.db import transaction
+from django.db.models import F
 
 from ..models import Inquiry, StatusHistory
 from . import calendar
