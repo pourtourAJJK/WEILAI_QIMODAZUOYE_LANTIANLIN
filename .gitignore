@@ -1,0 +1,37 @@
+# Trae IDE / BMAD Skill 安装目录
+.trae/
+
+# Node.js
+node_modules/
+frontend/node_modules/
+frontend/dist/
+frontend/.vite/
+
+# Python / Django
+__pycache__/
+*.py[cod]
+*.pyo
+*.egg-info/
+backend/.env
+backend/.venv/
+backend/venv/
+backend/.python-version
+backend/db.sqlite3
+backend/db.sqlite3-journal
+backend/media/
+backend/staticfiles/
+backend/*.log
+
+# IDE
+.idea/
+.vscode/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Env files
+.env
+.env.local
+.env.*.local
