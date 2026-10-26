@@ -19,7 +19,7 @@ from PIL import Image, ImageDraw, ImageFont
 from .models import (
     PortfolioProject, PortfolioCategory, MediaAsset, ProjectAssetRelation,
     Inquiry, Contact, StatusHistory, ProjectVisit, PlaySession,
-    SiteContent, BusinessCalendar, AdminBinding,
+    SiteContent, BusinessCalendar, AdminBinding, LoginAttempt,
 )
 from .services import (
     inquiry as inquiry_service,
@@ -29,6 +29,7 @@ from .services import (
     calendar as calendar_service,
     stats as stats_service,
     site as site_service,
+    login as login_service,
 )
 from .serializers import (
     SiteContentPublicSerializer, CategoryPublicSerializer, ProjectPublicSerializer,
@@ -80,36 +81,88 @@ def get_captcha(request):
 @api_view(["post"])
 @permission_classes([AllowAny])
 def login(request):
-    """管理员登录：用户名 + 密码 + 验证码 → JWT。"""
+    """
+    管理员登录 —— 三重校验 + 失败锁定：
+
+    1. 【锁定检查】该用户名当前是否处于锁定状态（失败 5 次 → 锁 5 分钟）
+    2. 【身份认证】Django Auth authenticate() 校验账号密码
+    3. 【身份绑定】AdminBinding 表中有记录 + user.is_active=True
+
+    失败计数器在：
+      - 登录失败时 +1（触发锁定时锁定时间 = now + 5min）
+      - 登录成功时清零 + 清除锁定
+    """
     serializer = LoginSerializer(data=request.data)
     serializer.is_valid(raise_exception=True)
 
-    # 验证码（开发阶段宽松：不强制校验）
-    # captcha = request.session.get("captcha", "")
-    # submitted = (serializer.validated_data.get("captcha_text") or "").upper()
-    # if captcha and submitted != captcha:
-    #     return Response({"detail": "验证码错误"}, status=400)
+    username = serializer.validated_data["username"]
+    password = serializer.validated_data["password"]
 
-    user = authenticate(
-        username=serializer.validated_data["username"],
-        password=serializer.validated_data["password"],
-    )
+    # ── 1) 锁定检查 ──
+    is_locked, remaining = login_service.is_account_locked(username)
+    if is_locked:
+        minutes = remaining // 60
+        secs = remaining % 60
+        return Response(
+            {
+                "detail": f"账号已被锁定，请在 {minutes} 分 {secs} 秒后重试",
+                "locked": True,
+                "remaining_seconds": remaining,
+                "fail_count": LoginAttempt.MAX_FAILS_BEFORE_LOCK,
+            },
+            status=429,  # Too Many Requests（语义：被限流/锁定）
+        )
+
+    # ── 2) Django Auth authenticate ──
+    user = authenticate(username=username, password=password)
     if not user:
-        return Response({"detail": "用户名或密码错误"}, status=401)
-    if not AdminBinding.objects.filter(user=user).exists():
-        return Response({"detail": "该账号未绑定管理员权限"}, status=403)
+        # 记录失败
+        record = login_service.record_login_failure(username)
+        remaining_attempts = max(
+            0, LoginAttempt.MAX_FAILS_BEFORE_LOCK - record.fail_count
+        )
+        payload = {
+            "detail": "用户名或密码错误",
+            "fail_count": record.fail_count,
+            "remaining_attempts": remaining_attempts,
+            "locked": record.is_locked(),
+            "remaining_seconds": record.remaining_lock_seconds(),
+        }
+        if record.is_locked():
+            return Response(payload, status=429)
+        return Response(payload, status=401)
+
+    # ── 3) 身份绑定校验（必须是我们自己创建的管理员） ──
+    is_valid, reason = login_service.verify_admin_identity(user)
+    if not is_valid:
+        # 身份不合格也算"登录失败"——避免攻击者知道哪些用户名存在
+        record = login_service.record_login_failure(username)
+        return Response(
+            {
+                "detail": reason,
+                "fail_count": record.fail_count,
+                "locked": record.is_locked(),
+            },
+            status=403,
+        )
+
+    # ── 4) 登录成功 → 签发 JWT + 重置失败计数 ──
+    login_service.reset_on_success(username)
 
     refresh = RefreshToken.for_user(user)
     request.session.pop("captcha", None)
-    return Response({
-        "refresh": str(refresh),
-        "access": str(refresh.access_token),
-        "user": {
-            "id": user.id,
-            "username": user.username,
-            "email": user.email,
+    return Response(
+        {
+            "refresh": str(refresh),
+            "access": str(refresh.access_token),
+            "user": {
+                "id": user.id,
+                "username": user.username,
+                "email": user.email,
+            },
         },
-    })
+        status=200,
+    )
 
 
 # ── 公开 API ──────────────────────────────────────────────────────
