@@ -1,0 +1,544 @@
+﻿[
+{
+  "model": "api.portfoliocategory",
+  "pk": 1,
+  "fields": {
+    "slug": "web_design",
+    "name": "网页设计",
+    "name_en": "",
+    "page_key": "campus",
+    "sort_order": 0,
+    "is_enabled": true,
+    "is_fixed": false,
+    "created_at": "2026-10-26T09:00:40.887Z"
+  }
+},
+{
+  "model": "api.portfoliocategory",
+  "pk": 2,
+  "fields": {
+    "slug": "aigc",
+    "name": "AIGC",
+    "name_en": "",
+    "page_key": "campus",
+    "sort_order": 1,
+    "is_enabled": true,
+    "is_fixed": false,
+    "created_at": "2026-10-26T09:00:40.893Z"
+  }
+},
+{
+  "model": "api.portfoliocategory",
+  "pk": 3,
+  "fields": {
+    "slug": "college_promo",
+    "name": "学院宣传",
+    "name_en": "",
+    "page_key": "campus",
+    "sort_order": 2,
+    "is_enabled": true,
+    "is_fixed": false,
+    "created_at": "2026-10-26T09:00:40.895Z"
+  }
+},
+{
+  "model": "api.portfoliocategory",
+  "pk": 4,
+  "fields": {
+    "slug": "short_film",
+    "name": "微电影",
+    "name_en": "",
+    "page_key": "campus",
+    "sort_order": 3,
+    "is_enabled": true,
+    "is_fixed": false,
+    "created_at": "2026-10-26T09:00:40.898Z"
+  }
+},
+{
+  "model": "api.portfoliocategory",
+  "pk": 5,
+  "fields": {
+    "slug": "commercial_ad",
+    "name": "商业广告",
+    "name_en": "",
+    "page_key": "commercial",
+    "sort_order": 4,
+    "is_enabled": true,
+    "is_fixed": false,
+    "created_at": "2026-10-26T09:00:40.901Z"
+  }
+},
+{
+  "model": "api.portfoliocategory",
+  "pk": 6,
+  "fields": {
+    "slug": "fashion_show",
+    "name": "服装走秀",
+    "name_en": "",
+    "page_key": "commercial",
+    "sort_order": 5,
+    "is_enabled": true,
+    "is_fixed": false,
+    "created_at": "2026-10-26T09:00:40.904Z"
+  }
+},
+{
+  "model": "api.portfoliocategory",
+  "pk": 7,
+  "fields": {
+    "slug": "documentary",
+    "name": "纪录片",
+    "name_en": "",
+    "page_key": "commercial",
+    "sort_order": 6,
+    "is_enabled": true,
+    "is_fixed": false,
+    "created_at": "2026-10-26T09:00:40.905Z"
+  }
+},
+{
+  "model": "api.portfoliocategory",
+  "pk": 8,
+  "fields": {
+    "slug": "self_media",
+    "name": "自媒体",
+    "name_en": "",
+    "page_key": "commercial",
+    "sort_order": 7,
+    "is_enabled": true,
+    "is_fixed": false,
+    "created_at": "2026-10-26T09:00:40.908Z"
+  }
+},
+{
+  "model": "api.mediaasset",
+  "pk": 1,
+  "fields": {
+    "asset_type": "image",
+    "file": "",
+    "storage_bucket": "local",
+    "object_key": "mock/covers/fashion1.jpg",
+    "mime_type": "image/jpeg",
+    "file_size": 500000,
+    "width": 1920,
+    "height": 1080,
+    "duration_seconds": null,
+    "asset_status": "ready",
+    "uploaded_at": "2026-10-26T09:00:40.956Z"
+  }
+},
+{
+  "model": "api.mediaasset",
+  "pk": 2,
+  "fields": {
+    "asset_type": "image",
+    "file": "",
+    "storage_bucket": "local",
+    "object_key": "mock/covers/ad1.jpg",
+    "mime_type": "image/jpeg",
+    "file_size": 400000,
+    "width": 1920,
+    "height": 1080,
+    "duration_seconds": null,
+    "asset_status": "ready",
+    "uploaded_at": "2026-10-26T09:00:40.957Z"
+  }
+},
+{
+  "model": "api.mediaasset",
+  "pk": 3,
+  "fields": {
+    "asset_type": "image",
+    "file": "",
+    "storage_bucket": "local",
+    "object_key": "mock/covers/selfmedia1.jpg",
+    "mime_type": "image/jpeg",
+    "file_size": 300000,
+    "width": 1080,
+    "height": 1920,
+    "duration_seconds": null,
+    "asset_status": "ready",
+    "uploaded_at": "2026-10-26T09:00:40.959Z"
+  }
+},
+{
+  "model": "api.portfolioproject",
+  "pk": 1,
+  "fields": {
+    "deleted_at": null,
+    "slug": "fashion-runway-2025",
+    "title": "2025 春季服装走秀",
+    "category": 6,
+    "content_type": "video",
+    "card_layout": "hero",
+    "summary": "",
+    "background": "商业广告",
+    "notes": "服装走秀项目。负责现场拍摄与后期剪辑，成片约 3 分钟。",
+    "credits": [
+      {
+        "label": "项目类型",
+        "value": "服装走秀"
+      },
+      {
+        "label": "本人职责",
+        "value": "摄像 + 后期"
+      },
+      {
+        "label": "项目时间",
+        "value": "2024 年"
+      }
+    ],
+    "content_blocks": [],
+    "cover_image": 1,
+    "cover_image_legacy_path": "",
+    "video_asset": null,
+    "is_published": true,
+    "version": 1,
+    "created_at": "2026-10-26T09:00:40.967Z",
+    "updated_at": "2026-10-26T09:00:40.970Z"
+  }
+},
+{
+  "model": "api.portfolioproject",
+  "pk": 2,
+  "fields": {
+    "deleted_at": null,
+    "slug": "brand-ad-campaign",
+    "title": "品牌广告片",
+    "category": 5,
+    "content_type": "video",
+    "card_layout": "banner",
+    "summary": "",
+    "background": "商业广告",
+    "notes": "品牌 30 秒广告片。担任摄像指导与后期调色。",
+    "credits": [
+      {
+        "label": "项目类型",
+        "value": "商业广告"
+      },
+      {
+        "label": "本人职责",
+        "value": "摄像 + 后期"
+      },
+      {
+        "label": "项目时间",
+        "value": "2024 年"
+      }
+    ],
+    "content_blocks": [],
+    "cover_image": 2,
+    "cover_image_legacy_path": "",
+    "video_asset": null,
+    "is_published": true,
+    "version": 1,
+    "created_at": "2026-10-26T09:00:40.974Z",
+    "updated_at": "2026-10-26T09:00:40.977Z"
+  }
+},
+{
+  "model": "api.portfolioproject",
+  "pk": 3,
+  "fields": {
+    "deleted_at": null,
+    "slug": "self-media-vlog",
+    "title": "自媒体 Vlog 系列",
+    "category": 8,
+    "content_type": "mixed",
+    "card_layout": "portrait",
+    "summary": "",
+    "background": "自媒体",
+    "notes": "日常创作记录。竖幅构图，适合移动端浏览。",
+    "credits": [
+      {
+        "label": "项目类型",
+        "value": "自媒体"
+      },
+      {
+        "label": "本人职责",
+        "value": "摄像 + 后期"
+      },
+      {
+        "label": "项目时间",
+        "value": "2024 年"
+      }
+    ],
+    "content_blocks": [],
+    "cover_image": 3,
+    "cover_image_legacy_path": "",
+    "video_asset": null,
+    "is_published": true,
+    "version": 1,
+    "created_at": "2026-10-26T09:00:40.978Z",
+    "updated_at": "2026-10-26T09:00:40.982Z"
+  }
+},
+{
+  "model": "api.portfolioproject",
+  "pk": 4,
+  "fields": {
+    "deleted_at": null,
+    "slug": "college-opening",
+    "title": "学院开学典礼",
+    "category": 3,
+    "content_type": "photo",
+    "card_layout": "banner",
+    "summary": "",
+    "background": "学院宣传",
+    "notes": "学院官方活动拍摄与宣传物料制作。",
+    "credits": [
+      {
+        "label": "项目类型",
+        "value": "学院宣传"
+      },
+      {
+        "label": "本人职责",
+        "value": "摄像 + 后期"
+      },
+      {
+        "label": "项目时间",
+        "value": "2024 年"
+      }
+    ],
+    "content_blocks": [],
+    "cover_image": null,
+    "cover_image_legacy_path": "",
+    "video_asset": null,
+    "is_published": true,
+    "version": 1,
+    "created_at": "2026-10-26T09:00:40.985Z",
+    "updated_at": "2026-10-26T09:00:40.985Z"
+  }
+},
+{
+  "model": "api.portfolioproject",
+  "pk": 5,
+  "fields": {
+    "deleted_at": null,
+    "slug": "short-film-award",
+    "title": "微电影《归途》",
+    "category": 4,
+    "content_type": "video",
+    "card_layout": "hero",
+    "summary": "",
+    "background": "微电影",
+    "notes": "校园微电影获奖作品。编剧 + 导演 + 后期。",
+    "credits": [
+      {
+        "label": "项目类型",
+        "value": "微电影"
+      },
+      {
+        "label": "本人职责",
+        "value": "摄像 + 后期"
+      },
+      {
+        "label": "项目时间",
+        "value": "2024 年"
+      }
+    ],
+    "content_blocks": [],
+    "cover_image": 1,
+    "cover_image_legacy_path": "",
+    "video_asset": null,
+    "is_published": true,
+    "version": 1,
+    "created_at": "2026-10-26T09:00:40.987Z",
+    "updated_at": "2026-10-26T09:00:40.992Z"
+  }
+},
+{
+  "model": "api.businesscalendar",
+  "pk": 1,
+  "fields": {
+    "strategy_version": 1,
+    "date": "2026-10-26",
+    "is_workday": true,
+    "notes": ""
+  }
+},
+{
+  "model": "api.businesscalendar",
+  "pk": 2,
+  "fields": {
+    "strategy_version": 1,
+    "date": "2026-10-27",
+    "is_workday": true,
+    "notes": ""
+  }
+},
+{
+  "model": "api.businesscalendar",
+  "pk": 3,
+  "fields": {
+    "strategy_version": 1,
+    "date": "2026-10-28",
+    "is_workday": true,
+    "notes": ""
+  }
+},
+{
+  "model": "api.businesscalendar",
+  "pk": 4,
+  "fields": {
+    "strategy_version": 1,
+    "date": "2026-10-29",
+    "is_workday": true,
+    "notes": ""
+  }
+},
+{
+  "model": "api.businesscalendar",
+  "pk": 5,
+  "fields": {
+    "strategy_version": 1,
+    "date": "2026-10-30",
+    "is_workday": true,
+    "notes": ""
+  }
+},
+{
+  "model": "api.businesscalendar",
+  "pk": 6,
+  "fields": {
+    "strategy_version": 1,
+    "date": "2026-10-31",
+    "is_workday": false,
+    "notes": ""
+  }
+},
+{
+  "model": "api.businesscalendar",
+  "pk": 7,
+  "fields": {
+    "strategy_version": 1,
+    "date": "2026-11-01",
+    "is_workday": false,
+    "notes": ""
+  }
+},
+{
+  "model": "api.businesscalendar",
+  "pk": 8,
+  "fields": {
+    "strategy_version": 1,
+    "date": "2026-11-02",
+    "is_workday": true,
+    "notes": ""
+  }
+},
+{
+  "model": "api.businesscalendar",
+  "pk": 9,
+  "fields": {
+    "strategy_version": 1,
+    "date": "2026-11-03",
+    "is_workday": true,
+    "notes": ""
+  }
+},
+{
+  "model": "api.businesscalendar",
+  "pk": 10,
+  "fields": {
+    "strategy_version": 1,
+    "date": "2026-11-04",
+    "is_workday": true,
+    "notes": ""
+  }
+},
+{
+  "model": "api.businesscalendar",
+  "pk": 11,
+  "fields": {
+    "strategy_version": 1,
+    "date": "2026-11-05",
+    "is_workday": true,
+    "notes": ""
+  }
+},
+{
+  "model": "api.businesscalendar",
+  "pk": 12,
+  "fields": {
+    "strategy_version": 1,
+    "date": "2026-11-06",
+    "is_workday": true,
+    "notes": ""
+  }
+},
+{
+  "model": "api.businesscalendar",
+  "pk": 13,
+  "fields": {
+    "strategy_version": 1,
+    "date": "2026-11-07",
+    "is_workday": false,
+    "notes": ""
+  }
+},
+{
+  "model": "api.businesscalendar",
+  "pk": 14,
+  "fields": {
+    "strategy_version": 1,
+    "date": "2026-11-08",
+    "is_workday": false,
+    "notes": ""
+  }
+},
+{
+  "model": "api.sitecontent",
+  "pk": 1,
+  "fields": {
+    "brand_name": "影羽",
+    "brand_name_en": "YINGYU STUDIO",
+    "home_title": "影羽·YINGYU STUDIO —— 用镜头讲述故事",
+    "home_description": "个人摄影作品集 —— 用镜头讲述故事，用影像传递温度。",
+    "about_text": "摄影与视频创作者的个人作品集网站。将视觉表达转化为可浏览、可合作的完整项目案例。",
+    "home_showreel": null,
+    "contact_email": "hello@yingyu.studio",
+    "contact_phone": "",
+    "social_links": [
+      {
+        "platform": "instagram",
+        "url": "#"
+      },
+      {
+        "platform": "bilibili",
+        "url": "#"
+      }
+    ],
+    "space_page_content": "",
+    "sla_days": 3,
+    "version": 1,
+    "updated_at": "2026-10-26T09:00:40.915Z"
+  }
+},
+{
+  "model": "api.adminbinding",
+  "pk": 1,
+  "fields": {
+    "user": 1,
+    "bound_at": "2026-10-26T09:00:15.939Z"
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 1,
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$6t2IBoxVoZHrwnpQahePfv$R1sBnH4S12n98CPQYNs76KZwnj7gqG8Myo3Bw/dBAwg=",
+    "last_login": null,
+    "is_superuser": true,
+    "username": "admin",
+    "first_name": "",
+    "last_name": "",
+    "email": "admin@example.com",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2026-10-26T09:00:15.564Z",
+    "groups": [],
+    "user_permissions": []
+  }
+}
+]
